@@ -1,15 +1,16 @@
 用python写脚本，一到运行就low爆，作为程序怎能没有GUI？
+参考资料[《PyQt5快速开发与实战》(含配套代码)](https://github.com/cxinping/PyQt5) 
 
-本教程基于[《PyQt5快速开发与实战》(含配套代码)](https://github.com/cxinping/PyQt5) 
+<!--more-->
 
 ## PyQt5环境搭建
 ### 安装环境 
 
-| 操作系统 | Windows10 64bit |
-| -------- | --------------- |
-| Python   | 3.7.0           |
-| PyQt5    | 5.15.0          |
-| Eric     | 20.9            |
+|操作系统|Windows10 64bit|
+|-------|---------|
+|Python|~~3.7.0~~ 3.8.5|
+|PyQt5|~~5.15.0~~ 5.15.2|
+|Eric|20.9|
 
 ### 安装Python
 
@@ -105,6 +106,33 @@ pip install jedi -i https://pypi.douban.com/simple
 
 参考链接: 
 
-- [Python3+Pycharm+PyQt5环境搭建步骤图文详解](https://www.jb51.net/article/162137.htm) 
 - [pyQt designer.exe 无法打开](https://blog.csdn.net/weixin_44134722/article/details/106367308?depth_1-) 
 - [This application failed to start because no Qt platform plugin could be initialized.](https://blog.csdn.net/tt1724369779/article/details/101434147) 
+
+最新版的designer.exe位置略有不同，参考：`C:\Users\SKNP\anaconda3\envs\pyqt\Lib\site-packages\qt5_applications\Qt\bin\designer.exe`
+
+在pycharm中添加`External Tools`：
+* File->Settings->Tools->External Tools->+
+
+```
+Name: QtDesigner
+Group: External Tools
+Program: C:\Users\SKNP\anaconda3\envs\pyqt\Lib\site-packages\qt5_applications\Qt\bin\designer.exe
+Working directory: $FileDir$
+```
+```
+Name: PyUIC
+Group: External Tools
+Program: C:\Users\SKNP\anaconda3\envs\pyqt\Scripts\pyuic5.exe
+Arguments: $FileName$ -o $FileParentDir$\$FileNameWithoutExtension$.py
+Working directory: $FileDir$
+```
+```
+Name: PyRCC
+Group: External Tools
+Program: C:\Users\SKNP\anaconda3\envs\pyqt\Scripts\pyrcc5.exe
+Arguments: $FileName$ -o$FileNameWithoutExtension$_rc.py
+Working directory: $FileDir$
+```
+
+**Done!**
